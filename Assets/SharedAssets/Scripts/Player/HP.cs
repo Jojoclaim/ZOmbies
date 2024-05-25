@@ -25,6 +25,7 @@ public class HP : MonoBehaviour
     public void Awake()
     {
         StartCoroutine(Heal());
+        UpdateHP();
     }
 
     public IEnumerator Heal()
@@ -35,6 +36,11 @@ public class HP : MonoBehaviour
             {
                 yield return new WaitForSeconds(3);
                 HP_Amount += HP_Max * HealPercent / 100;
+                if (HP_Amount >= HP_Max)
+                {
+                    HP_Amount = HP_Max;
+                }
+                UpdateHP();
             }
             else
             {
